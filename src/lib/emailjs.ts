@@ -1,4 +1,4 @@
-import emailjs from '@emailjs/browser';
+// import emailjs from '@emailjs/browser';
 
 // EmailJS configuration
 export const EMAILJS_CONFIG = {
@@ -10,7 +10,7 @@ export const EMAILJS_CONFIG = {
 
 // Initialize EmailJS
 export const initializeEmailJS = () => {
-  emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+  // emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
 };
 
 // Contact form data interface
@@ -57,11 +57,12 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<{ suc
     console.log('EmailJS Template Parameters:', templateParams);
 
     // Send email
-    const response = await emailjs.send(
-      EMAILJS_CONFIG.SERVICE_ID,
-      EMAILJS_CONFIG.TEMPLATE_ID,
-      templateParams
-    );
+    // const response = await emailjs.send(
+    //   EMAILJS_CONFIG.SERVICE_ID,
+    //   EMAILJS_CONFIG.TEMPLATE_ID,
+    //   templateParams
+    // );
+    const response = { status: 200 }; // Fake response for disabled form
 
     if (response.status === 200) {
       return {

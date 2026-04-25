@@ -13,7 +13,6 @@ import CountrySelector from "@/components/CountrySelector";
 import GoogleTranslate from "@/components/GoogleTranslate";
 import FloatingSocialIcons from "@/components/FloatingSocialIcons";
 import { Country } from "@/lib/countries";
-import { sendContactEmail, validateContactForm, ContactFormData } from "@/lib/emailjs";
 import DotSpinner from "@/components/DotSpinner";
 
 export default function HomePage() {
@@ -122,52 +121,7 @@ export default function HomePage() {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: '' });
-
-    // Prepare form data with selected country
-    const contactData: ContactFormData = {
-      ...formData,
-      user_country: selectedCountry?.name || ''
-    };
-
-    // Validate form
-    const validation = validateContactForm(contactData);
-    if (!validation.isValid) {
-      setSubmitStatus({
-        type: 'error',
-        message: validation.errors.join(', ')
-      });
-      setIsSubmitting(false);
-      return;
-    }
-
-    try {
-      const result = await sendContactEmail(contactData);
-      setSubmitStatus({
-        type: result.success ? 'success' : 'error',
-        message: result.message
-      });
-
-      // Reset form on success
-      if (result.success) {
-        setFormData({
-          company_name: '',
-          user_name: '',
-          user_email: '',
-          user_phone: '',
-          message: ''
-        });
-        setSelectedCountry(null);
-      }
-    } catch (error) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'An unexpected error occurred. Please try again.'
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    alert("Inquiry form temporarily unavailable. Please contact us directly at info@sprnaturals.in");
   };
 
   // products grid removed per request; homepage now focuses on categories
@@ -645,20 +599,14 @@ export default function HomePage() {
                   
                   <Button 
                     type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-nature-green hover:bg-leaf-green text-white py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled
+                    style={{
+                      opacity: 0.6,
+                      cursor: "not-allowed"
+                    }}
+                    className="w-full bg-nature-green text-white py-6 text-lg"
                   >
-                    {isSubmitting ? (
-                      <>
-                        <DotSpinner size="sm" color="white" className="mr-2" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5 mr-2" />
-                        Send Message
-                      </>
-                    )}
+                    Form temporarily unavailable
                   </Button>
                 </form>
               </Card>
