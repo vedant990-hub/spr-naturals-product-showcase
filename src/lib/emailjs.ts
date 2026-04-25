@@ -1,12 +1,6 @@
 // import emailjs from '@emailjs/browser';
 
-// EmailJS configuration
-export const EMAILJS_CONFIG = {
-  // You'll need to replace these with your actual EmailJS credentials
-  SERVICE_ID: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'your_service_id',
-  TEMPLATE_ID: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'your_template_id',
-  PUBLIC_KEY: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'your_public_key',
-};
+// EmailJS configuration removed to prevent automated email abuse
 
 // Initialize EmailJS
 export const initializeEmailJS = () => {
@@ -36,7 +30,7 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<{ suc
       from_email: formData.user_email,
       to_name: 'SPR Naturals Team',
       reply_to: formData.user_email,
-      
+
       // Custom variables for the template
       user_name: formData.user_name,
       user_email: formData.user_email,
@@ -46,7 +40,7 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<{ suc
       country: formData.user_country,
       user_country: formData.user_country,
       message: formData.message,
-      
+
       // Additional variables for better template compatibility
       subject: `New Contact Form Submission from ${formData.user_name}`,
       date: new Date().toLocaleDateString(),
