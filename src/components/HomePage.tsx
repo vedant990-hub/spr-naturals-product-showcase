@@ -709,20 +709,23 @@ export default function HomePage() {
             </Button>
           </div>
           
-          <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-white/80 gap-4">
-            <p>&copy; 2025 SPR Naturals. A brand owned and operated by India True Global Exim.</p>
-            <p className="text-sm">
-              Website designed by{" "}
-              <a
-                href="https://pawarvedant.netlify.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-bold underline hover:text-white transition-colors"
-                style={{ textUnderlineOffset: '4px' }}
-              >
-                Vedant Pawar
-              </a>
-            </p>
+          <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row items-center text-sm text-white/80 gap-4">
+            <div className="hidden md:block flex-1"></div>
+            <p className="text-center shrink-0">&copy; 2025 SPR Naturals. A brand owned and operated by India True Global Exim.</p>
+            <div className="flex-1 flex justify-end">
+              <p className="text-sm text-center md:text-right">
+                Website designed by{" "}
+                <a
+                  href="https://pawarvedant.netlify.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold underline hover:text-white transition-colors"
+                  style={{ textUnderlineOffset: '4px' }}
+                >
+                  Vedant Pawar
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </footer>
