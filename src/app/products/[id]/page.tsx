@@ -415,7 +415,7 @@ export default function ProductDetailPage() {
             </p>
             <div className="flex flex-col md:flex-row items-center text-white/60 text-xs gap-4 mt-6 w-full">
               <div className="hidden md:block flex-1"></div>
-              <p className="text-center shrink-0">
+              <p className="text-center shrink-0 font-bold">
                 &copy; 2025 SPR Naturals. A brand owned and operated by India True Global Exim.
               </p>
               <div className="flex-1 flex justify-end">
