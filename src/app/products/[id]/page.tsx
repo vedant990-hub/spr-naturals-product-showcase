@@ -416,6 +416,17 @@ export default function ProductDetailPage() {
             <p className="text-white/60 text-xs">
               &copy; 2025 SPR Naturals. A brand owned and operated by India True Global Exim.
             </p>
+            <div className="w-full text-right md:text-right text-center text-xs opacity-80 mt-1 pr-3">
+              Designed & Developed by{" "}
+              <a
+                href="https://pawarvedant.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                Vedant Pawar
+              </a>
+            </div>
           </div>
         </div>
       </footer>
