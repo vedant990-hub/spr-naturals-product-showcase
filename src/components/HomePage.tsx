@@ -8,12 +8,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn, getAllCategoriesWithCounts, getProductsByCategoryId } from "@/lib/utils";
 import ScrollFloat from "@/components/ui/ScrollFloat";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import Chatbot from "@/components/Chatbot";
 import CountrySelector from "@/components/CountrySelector";
 import GoogleTranslate from "@/components/GoogleTranslate";
 import FloatingSocialIcons from "@/components/FloatingSocialIcons";
 import { Country } from "@/lib/countries";
 import DotSpinner from "@/components/DotSpinner";
+
+type Certificate = {
+  name: string;
+  description: string;
+  image: string;
+};
 
 export default function HomePage() {
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
@@ -31,6 +38,7 @@ export default function HomePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
   const [isNavSolid, setIsNavSolid] = useState(false);
+  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -180,6 +188,34 @@ export default function HomePage() {
     }
   ];
 
+  const certificates: Certificate[] = [
+    {
+      name: "IEC Certificate",
+      description: "Import Export Code issued by DGFT, Government of India",
+      image: "/certificate/IEC.png",
+    },
+    {
+      name: "GST Registration",
+      description: "Goods and Services Tax registration issued by Government of India",
+      image: "/certificate/GST.png",
+    },
+    {
+      name: "Udyam Registration",
+      description: "MSME registration under the Ministry of Micro, Small & Medium Enterprises",
+      image: "/certificate/UDYAM.png",
+    },
+    {
+      name: "FIEO Membership",
+      description: "Registered member of the Federation of Indian Export Organisations",
+      image: "/certificate/FIEO.png",
+    },
+    {
+      name: "ISO 9001:2015",
+      description: "Quality Management System certification",
+      image: "/certificate/ISO.png",
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero H1 - Hidden visually but accessible for SEO */}
@@ -210,10 +246,11 @@ export default function HomePage() {
                 SPR Naturals
               </span>
             </div>
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-5 xl:gap-6 2xl:gap-8">
               <a href="#about" className="text-white hover:text-nature-green transition-colors text-lg font-medium">About</a>
               <a href="#products" className="text-white hover:text-nature-green transition-colors text-lg font-medium">Products</a>
               <a href="#benefits" className="text-white hover:text-nature-green transition-colors text-lg font-medium">Benefits</a>
+              <a href="#certifications" className="text-white hover:text-nature-green transition-colors text-lg font-medium whitespace-nowrap">Certifications</a>
               <a href="#testimonials" className="text-white hover:text-nature-green transition-colors text-lg font-medium">Testimonials</a>
               <a href="#contact" className="text-white hover:text-nature-green transition-colors text-lg font-medium">Contact</a>
             </div>
@@ -326,7 +363,7 @@ export default function HomePage() {
       {/* About Section */}
       <section id="about" className="py-24 bg-cream">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="mx-auto max-w-[1080px] text-center space-y-6">
             <ScrollFloat
               animationDuration={1}
               ease="back.inOut(2)"
@@ -339,17 +376,22 @@ export default function HomePage() {
             >
               Welcome to SPR Naturals
             </ScrollFloat>
-            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              We are a Indian Exporter from Nagpur, India, supplying sustainable food‑service and packaging
-              products worldwide. Our focus is eco‑friendly alternatives that reduce plastic waste while delivering
-              reliable performance for restaurants, caterers, airlines and retailers.
+            <p className="mx-auto text-lg text-muted-foreground leading-8 md:leading-9">
+              <span className="font-semibold text-foreground">India True Global Exims</span> is a Nagpur, India-based <span className="font-semibold text-foreground">Merchant Exporter</span> and <span className="font-semibold text-foreground">Global Sourcing Partner</span> operating under the trademarked brand <span className="font-semibold text-foreground">SPR Naturals™</span>. Founded by Prasad Prakash Rajandekar, a Government Empanelled Auditor, Income Tax Practitioner, and GST Consultant, the firm combines professional expertise with a commitment to reliable international trade.
             </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Our catalog includes Areca leaf tableware, sugarcane bagasse plates and trays, paper cups and straws,
-              kraft paper bags, meal boxes, aluminium foil containers, and wooden cutlery. We offer consistent
-              quality, export‑grade packaging, documentation support, and on‑time shipments — with options for
-              private‑label branding on request.
+            <p className="mx-auto text-lg text-muted-foreground leading-8 md:leading-9">
+              We connect international buyers with reliable Indian manufacturers and suppliers, delivering export-ready solutions built on professionalism, transparency, and long-term business relationships.
             </p>
+            <p className="mx-auto text-lg text-muted-foreground leading-8 md:leading-9">
+              Our sourcing network includes eco-friendly products, packaging materials, bags and backpacks, turmeric, spices, bedspreads and home textiles, agricultural products, pharmaceuticals, nutraceuticals, medical consumables, consumer goods, industrial products, and other products sourced from trusted Indian manufacturers and suppliers as per buyer requirements and specifications.
+            </p>
+            <p className="mx-auto text-lg text-muted-foreground leading-8 md:leading-9">
+              We provide supplier identification, sourcing coordination, <span className="font-semibold text-foreground">export documentation</span>, <span className="font-semibold text-foreground">logistics support</span>, and shipment management. India True Global Exims is registered with <span className="font-semibold text-foreground">IEC</span>, <span className="font-semibold text-foreground">GST</span>, <span className="font-semibold text-foreground">MSME (Udyam)</span>, and is a member of <span className="font-semibold text-foreground">FIEO</span>, ensuring credibility, compliance, and dependable service for global buyers.
+            </p>
+            <div className="pt-1">
+              <p className="mx-auto text-lg font-semibold text-foreground leading-8 md:leading-9">Our Motto</p>
+              <p className="mx-auto text-lg text-muted-foreground leading-8 md:leading-9">"<span className="font-semibold text-foreground">From Soil to Soul™</span>"</p>
+            </div>
           </div>
         </div>
       </section>
@@ -450,6 +492,87 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section id="certifications" className="py-24 bg-background scroll-mt-32 md:scroll-mt-36 lg:scroll-mt-40">
+        <div className="mx-auto max-w-[1500px] px-6">
+          <div className="text-center mb-16">
+            <ScrollFloat
+              animationDuration={1}
+              ease="back.inOut(2)"
+              scrollStart="center bottom+=50%"
+              scrollEnd="bottom bottom-=40%"
+              stagger={0.03}
+              containerClassName="mb-4 text-nature-green"
+              textClassName="text-4xl md:text-5xl font-bold"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Our Certifications & Registrations
+            </ScrollFloat>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              India True Global Exims is registered with the relevant Government of India authorities and recognized export organizations, demonstrating our commitment to compliance, quality, and trusted international trade.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4 items-stretch">
+            {certificates.map((certificate) => (
+              <button
+                key={certificate.name}
+                type="button"
+                onClick={() => setSelectedCertificate(certificate)}
+                className="group h-full text-left cursor-pointer focus:outline-none"
+              >
+                <Card className="h-full overflow-hidden border-sage-green/20 bg-white p-0 transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-xl group-focus-visible:-translate-y-1 group-focus-visible:shadow-xl">
+                  <div className="relative aspect-[3/2] bg-gradient-to-br from-cream to-white border-b border-sage-green/10">
+                    <Image
+                      src={certificate.image}
+                      alt={`${certificate.name} thumbnail`}
+                      fill
+                      className="object-contain p-3 transition-transform duration-300 group-hover:scale-[1.02]"
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 20vw"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-4">
+                    <h3 className="text-base font-semibold text-foreground">{certificate.name}</h3>
+                    <p className="mt-2 min-h-[2.75rem] text-sm leading-5 text-muted-foreground line-clamp-2">{certificate.description}</p>
+                    <div className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-nature-green">
+                      View certificate
+                    </div>
+                  </div>
+                </Card>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <Dialog open={Boolean(selectedCertificate)} onOpenChange={(open) => !open && setSelectedCertificate(null)}>
+          <DialogContent className="max-w-[min(96vw,1100px)] border-0 bg-transparent p-0 shadow-none">
+            {selectedCertificate ? (
+              <div className="relative flex items-center justify-center">
+                <div className="absolute inset-0 rounded-2xl bg-black/10 backdrop-blur-[2px]" />
+                <div className="relative w-full overflow-hidden rounded-2xl border border-white/20 bg-white shadow-2xl">
+                  <div className="sr-only">
+                    <DialogTitle>{selectedCertificate.name}</DialogTitle>
+                    <DialogDescription>Full certificate preview</DialogDescription>
+                  </div>
+                  <div className="relative max-h-[85vh] w-full bg-cream/60">
+                    <Image
+                      src={selectedCertificate.image}
+                      alt={selectedCertificate.name}
+                      width={1600}
+                      height={2200}
+                      sizes="(max-width: 768px) 95vw, 80vw"
+                      className="h-auto max-h-[85vh] w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : null}
+          </DialogContent>
+        </Dialog>
       </section>
 
       {/* Testimonials Section */}
@@ -704,15 +827,6 @@ export default function HomePage() {
               </ul>
             </div>
           </div>
-          {/* Catalogue Button */}
-1          <div className="mb-6 flex justify-center">
-            <Button asChild size="sm" className="bg-white text-nature-green hover:bg-cream text-sm py-2 px-4 font-medium">
-              <a href="/catalog.pdf" download aria-label="Download catalog PDF">
-                📄 Download Catalogue
-              </a>
-            </Button>
-          </div>
-          
           <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row items-center text-sm text-white/80 gap-4">
             <div className="hidden md:block flex-1"></div>
             <p className="text-center shrink-0 font-bold">&copy; 2025 SPR Naturals. A brand owned and operated by India True Global Exim.</p>
