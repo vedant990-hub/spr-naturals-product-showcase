@@ -68,6 +68,7 @@ export default function HomePage() {
   useEffect(() => {
     const videos = document.querySelectorAll('video');
     videos.forEach(video => {
+      video.playbackRate = 0.75;
       // Start videos unmuted (sound enabled by default)
       video.muted = false;
       setIsVideoMuted(false);
